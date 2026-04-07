@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Read My Hands</title>
+
+  <script src="https://unpkg.com/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+  <script src="https://unpkg.com/@teachablemachine/image@0.8.5/dist/teachablemachine-image.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background-grid"></div>
+  <div class="scanlines"></div>
+
+  <main class="app">
+    <header class="hero">
+      <h1>Read My Hands</h1>
+      <p class="subtitle">
+        A playful little system that turns gestures into guesses, scores, and decisions.
+      </p>
+    </header>
+
+    <section class="layout">
+      <div class="left-column">
+        <div class="card webcam-card">
+          <div class="card-topline"></div>
+          <div class="card-header">
+            <h2>Live Recognition Feed</h2>
+            <span class="status-pill" id="statusPill">IDLE</span>
+          </div>
+
+          <div id="webcam-container" class="webcam-frame"></div>
+
+          <div id="countdownOverlay" class="countdown-overlay hidden">
+            <span id="countdownBig">3</span>
+          </div>
+
+          <div id="resultFlash" class="result-flash hidden">
+            <span id="resultFlashText">YOU WIN</span>
+          </div>
+
+          <div id="label-container" class="label-box">
+            Press Start to initialize the system.
+          </div>
+
+          <div class="confidence-panel">
+            <h3>Confidence Readout</h3>
+
+            <div class="confidence-row">
+              <span>Rock</span>
+              <div class="bar"><div id="rockBar" class="fill"></div></div>
+              <span id="rockPct">0%</span>
+            </div>
+
+            <div class="confidence-row">
+              <span>Paper</span>
+              <div class="bar"><div id="paperBar" class="fill"></div></div>
+              <span id="paperPct">0%</span>
+            </div>
+
+            <div class="confidence-row">
+              <span>Scissors</span>
+              <div class="bar"><div id="scissorsBar" class="fill"></div></div>
+              <span id="scissorsPct">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card concept-card">
+          <div class="card-header">
+            <h2>About</h2>
+          </div>
+          <p>
+            This machine does not really understand the gesture. It only predicts
+            from the images it was trained on, turning hand movements into probability,
+            and probability into a decision.
+          </p>
+        </div>
+      </div>
+
+      <div class="right-column">
+        <div class="card status-card">
+          <div class="card-header">
+            <h2>Round Status</h2>
+          </div>
+
+          <p id="countdown" class="mono">Press Start</p>
+          <p id="playerMove">Your move: -</p>
+          <p id="computerMove">Computer: -</p>
+          <p id="result">Result: -</p>
+        </div>
+
+        <div class="card versus-card">
+          <div class="gesture-side">
+            <p class="gesture-label">YOU</p>
+            <div id="playerEmoji" class="gesture-emoji">?</div>
+            <div id="playerMoveBig" class="gesture-name">WAITING</div>
+          </div>
+
+          <div class="versus-text">VS</div>
+
+          <div class="gesture-side">
+            <p class="gesture-label">MACHINE</p>
+            <div id="computerEmoji" class="gesture-emoji">?</div>
+            <div id="computerMoveBig" class="gesture-name">WAITING</div>
+          </div>
+        </div>
+
+        <div class="card score-card">
+          <div class="card-header">
+            <h2>Score</h2>
+          </div>
+          <p id="playerScore">You: 0</p>
+          <p id="computerScore">Machine: 0</p>
+        </div>
+
+        <div class="controls">
+          <button id="startBtn">Start</button>
+          <button id="nextRoundBtn" disabled>Again</button>
+          <button id="resetBtn">Reset</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="sketch.js"></script>
+</body>
+</html>
